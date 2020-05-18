@@ -7,7 +7,7 @@ Package tested on: moodle 3.6+
 
 QUICK INSTALL
 ==============
-Download zip package, extract the counter folder and upload this folder into blocks/.
+Download zip package, extract the precondition folder and upload this folder into blocks/.
 
 ABOUT
 =============
@@ -16,6 +16,12 @@ GIT: https://github.com/davidherney/moodle-block_precondition
 
 IN VERSION
 =============
+2020032102:
+Control required precondition with specific capability.
+
+2020032101:
+Added block settings and the data module.
+
 2020032100:
 Start project
 

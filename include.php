@@ -36,29 +36,29 @@ if ($id) {
 }
 
 if (!$precondition) {
-    die('console.log({ "state": "not_precondition"});');
+    // Try load from settings.
+    try {
+        $precondition = block_precondition_loadbysettings();
+    } catch (Exception $e) {
+        die('console.log("' . get_string($e->getMessage(), 'block_precondition') . '");');
+    }
+    if (!$precondition) {
+        die('console.log("' . get_string("not_precondition", 'block_precondition') . '");');
+    }
 }
 
-$context = context_course::instance($precondition->courseid);
-if(!$USER || is_guest($context, $USER) || !isloggedin()) {
-    die('console.log({ "state": "not_user"});');
+try {
+    $satisfied = block_precondition_satisfied($precondition);
+} catch (Exception $e) {
+    die('console.log("' . get_string($e->getMessage(), 'block_precondition') . '");');
+}
+
+if ($satisfied) {
+    die('console.log(\'' . get_string('satisfied', 'block_precondition', $precondition->name) . '\');');
 }
 
 $cm = $DB->get_record('course_modules', array('id' => $precondition->cmid));
-if (!$cm) {
-    die('console.log({ "state": "cm_error"});');
-}
-
 $module = $DB->get_record('modules', array('id' => $cm->module));
-
-$function = 'block_precondition_satisfied_' . $module->name;
-if (!function_exists($function)) {
-    die('console.log({ "state": "mod_notimplemented"});');
-}
-
-if ($function($cm->instance)) {
-    die('console.log({ "state": "satisfied"});');
-}
 
 $functionurl = 'block_precondition_url_' . $module->name;
 if (!function_exists($functionurl)) {

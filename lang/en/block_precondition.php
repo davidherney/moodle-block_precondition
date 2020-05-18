@@ -24,4 +24,17 @@
 
 $string['pluginname'] = 'Precondition';
 $string['precondition:addinstance'] = 'Add a new Precondition';
+$string['precondition:attend'] = 'Attend to Precondition';
 $string['goto'] = 'Go to {$a}';
+$string['moduleinfo'] = 'Module info';
+$string['moduleinfo_help'] = 'Information about conditioned module.
+The info structure is a valid json object with the fields:  courseid, cmid, name, description, descriptionformat.
+Other params depend of the module type.';
+$string['not_precondition'] = 'Precondition not setted';
+$string['error/not_user'] = 'User not available to precondition';
+$string['error/cm_error'] = 'Course module not exists';
+$string['error/mod_notimplemented'] = 'Module type not available to preconditions';
+$string['error/bad_json_precondition'] = 'JSON used to configure precondition is not valid';
+$string['error/bad_settings_precondition'] = 'JSON used to configure precondition don\'t have the required fields';
+$string['error/user_notrequire'] = 'Current user not require the precondition message.';
+$string['satisfied'] = 'Condition "{$a}" satisfied';

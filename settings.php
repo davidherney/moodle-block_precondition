@@ -15,37 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Precondition block caps.
+ * Settings for the Precondition block
  *
+ * @since     3.6
  * @package   block_precondition
  * @copyright 2020 David Herney Bernal - cirano
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or late
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-
-    'block/precondition:addinstance' => array(
-        'riskbitmask' => RISK_SPAM | RISK_XSS,
-
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
-            'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        ),
-
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    ),
-
-    'block/precondition:attend' => array(
-        'riskbitmask' => RISK_SPAM,
-
-        'captype' => 'read',
-        'contextlevel' => CONTEXT_COURSE,
-        'archetypes' => array(
-            'student' => CAP_ALLOW,
+if ($ADMIN->fulltree) {
+    $settings->add(
+        new admin_setting_configtextarea(
+            'block_precondition/moduleinfo',
+            get_string('moduleinfo', 'block_precondition'),
+            get_string('moduleinfo_help', 'block_precondition'), '', PARAM_RAW
         )
-    ),
-);
+    );
+}
+
+
