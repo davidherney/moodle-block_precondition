@@ -33,7 +33,7 @@ function block_precondition_satisfied($precondition) {
         $context = context_course::instance($precondition->courseid, MUST_EXIST);
     }
 
-    if (!has_capability('block/precondition:attend', $context)) {
+    if (!has_capability('block/precondition:attend', $context) || is_siteadmin()) {
         throw new moodle_exception('user_notrequire');
     }
 

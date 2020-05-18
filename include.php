@@ -81,6 +81,11 @@ window.onload = function() {
             return;
         }
 
+        if ($('body').attr('id') == 'page-user-policy') {
+            console.log("It's the page-user-policy page");
+            return;
+        }
+
         var $goto = $('<a class="btn btn-primary" href="<?php echo $gotourl; ?>"><?php echo $gotostr; ?></a>');
         var $gotobox = $('<p class="goto-box"></p>');
         $gotobox.append($goto);
