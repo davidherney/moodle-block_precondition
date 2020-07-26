@@ -48,4 +48,14 @@ $capabilities = array(
 
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
+
+    'block/precondition:attend' => array(
+        'riskbitmask' => RISK_SPAM,
+
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'student' => CAP_ALLOW,
+        )
+    ),
 );

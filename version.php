@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020032101;
+$plugin->version   = 2020032102;
 $plugin->requires  = 2011120507;        // Requires this Moodle version
 $plugin->component = 'block_precondition'; // Full name of the plugin (used for diagnostics)
 $plugin->maturity = MATURITY_BETA;
