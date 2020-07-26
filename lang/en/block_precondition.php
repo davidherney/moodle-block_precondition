@@ -24,4 +24,5 @@
 
 $string['pluginname'] = 'Precondition';
 $string['precondition:addinstance'] = 'Add a new Precondition';
+$string['precondition:myaddinstance'] = 'Add a new Precondition to Dashboard';
 $string['goto'] = 'Go to {$a}';
