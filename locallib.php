@@ -131,3 +131,23 @@ function block_precondition_url_data($cm) {
     return new moodle_url('/mod/data/edit.php', array('id' => $cm->id));
 
 }
+
+/**
+ * To Page resource type.
+*/
+function block_precondition_satisfied_page($id, $precondition) {
+
+    global $DB, $USER;
+
+    $count = $DB->count_records('logstore_standard_log', array('objectid' => $id, 'component' => 'mod_page',
+                    'userid' => $USER->id, 'action' => 'viewed'));
+
+    return $count > 0;
+
+}
+
+function block_precondition_url_page($cm) {
+
+    return new moodle_url('/mod/page/view.php', array('id' => $cm->id));
+
+}
