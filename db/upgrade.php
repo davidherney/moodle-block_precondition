@@ -29,10 +29,9 @@
  * If there's something it cannot do itself, it
  * will tell you what you need to do.
  *
- * @since     3.6
- * @package   block_precondition
- * @copyright 2020 David Herney Bernal - cirano
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    block_precondition
+ * @copyright  2024 David Herney @ BambuCo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;

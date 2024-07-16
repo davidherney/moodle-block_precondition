@@ -17,25 +17,30 @@
 /**
  * Strings for component 'block_precondition', language 'en'
  *
- * @package   block_precondition
- * @copyright 2020 David Herney Bernal - cirano
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    block_precondition
+ * @copyright  2020 David Herney @ BambuCo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Precondition';
-$string['precondition:addinstance'] = 'Add a new Precondition';
-$string['precondition:myaddinstance'] = 'Add a new Precondition to Dashboard';
-$string['precondition:attend'] = 'Attend to Precondition';
-$string['goto'] = 'Go to {$a}';
+$string['amount'] = 'Amount';
+$string['condition'] = 'Condition';
+$string['conditionmessage'] = 'Condition message';
+$string['conditionstitle'] = 'Actions';
+$string['forecastdays'] = 'Forecast days';
+$string['forecastdays_help'] = 'Days to display the message before the activity ends.
+If the activity does not have an end date then this configuration will not be taken into account.';
+$string['gotocomplete'] = 'Go to complete';
 $string['moduleinfo'] = 'Module info';
 $string['moduleinfo_help'] = 'Information about conditioned module.
 The info structure is a valid json object with the fields:  courseid, cmid, name, description, descriptionformat.
 Other params depend of the module type.';
-$string['not_precondition'] = 'Precondition not setted';
-$string['error/not_user'] = 'User not available to precondition';
-$string['error/cm_error'] = 'Course module not exists';
-$string['error/mod_notimplemented'] = 'Module type not available to preconditions';
-$string['error/bad_json_precondition'] = 'JSON used to configure precondition is not valid';
-$string['error/bad_settings_precondition'] = 'JSON used to configure precondition don\'t have the required fields';
-$string['error/user_notrequire'] = 'Current user not require the precondition message.';
-$string['satisfied'] = 'Condition "{$a}" satisfied';
+$string['pluginname'] = 'Precondition';
+$string['precondition:addinstance'] = 'Add a new Precondition';
+$string['precondition:attend'] = 'Attend to Precondition';
+$string['precondition:myaddinstance'] = 'Add a new Precondition to Dashboard';
+$string['conditionssatisfied'] = 'There are no pending conditions to attend to.';
+$string['excludeadmins'] = 'Exclude admins';
+$string['excludeadmins_help'] = 'Exclude admins from the precondition validation.';
+$string['all'] = 'All';
+$string['daily'] = 'Daily';
+$string['period'] = 'Period';

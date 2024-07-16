@@ -11,12 +11,20 @@
     overflow: auto;
 }
 
-#block_precondition_panel .close{
+#block_precondition_panel .close {
     position: absolute;
     top: 0;
     right: 5px;
 }
 
 #block_precondition_panel .goto-box {
+    text-align: center;
+}
+
+.row.block_precondition_condition_option {
+    display: none;
+}
+
+.block_precondition-message .box-buttons {
     text-align: center;
 }

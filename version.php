@@ -17,16 +17,15 @@
 /**
  * Version details
  *
- * @since     3.6
- * @package   block_precondition
- * @copyright 2020 David Herney Bernal - cirano
+ * @package    block_precondition
+ * @copyright  2020 David Herney - cirano
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020032102;
-$plugin->requires  = 2011120507;        // Requires this Moodle version
+$plugin->version = 2024072344;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires = 2022112808;        // Requires this Moodle version
 $plugin->component = 'block_precondition'; // Full name of the plugin (used for diagnostics)
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = 'C'; // First of: C, a, t, 4, l, i, n, ª releases
+$plugin->release = 'a'; // First of: C, a, t, 4, l, i, n, ª releases

@@ -22,19 +22,25 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Mensaje de pre-condición';
-$string['precondition:addinstance'] = 'Adicionar un nuevo bloque de Precondición';
-$string['precondition:attend'] = 'Atender a una precondición';
-$string['goto'] = 'Ir a {$a}';
+$string['all'] = 'Todos';
+$string['amount'] = 'Cantidad de registros';
+$string['condition'] = 'Condición';
+$string['conditionmessage'] = 'Mensaje de condición';
+$string['conditionssatisfied'] = 'No hay condiciones pendientes que atender.';
+$string['conditionstitle'] = 'Acciones';
+$string['daily'] = 'Diario';
+$string['excludeadmins'] = 'Excluir administradores';
+$string['excludeadmins_help'] = 'Excluir administradores de la validación de condiciones previas.';
+$string['forecastdays'] = 'Días de previsión';
+$string['forecastdays_help'] = 'Días para mostrar el mensaje antes de que finalice la actividad.
+Si la actividad no tiene fecha de finalización entonces esta configuración no será tenida en cuenta.';
+$string['gotocomplete'] = 'Ir a completar';
 $string['moduleinfo'] = 'Información del módulo';
 $string['moduleinfo_help'] = 'Información acerca del módulo en el que se basa la condición.
 La estructura de la información consiste de una cadena JSON válida que contenga un objeto con los campos:  courseid, cmid, name, description, descriptionformat.
 Otros parámetros pueden aplicar dependiendo del tipo de módulo.';
-$string['not_precondition'] = 'Precondición no configurada';
-$string['error/not_user'] = 'Usuario actual no disponible para precondición';
-$string['error/cm_error'] = 'Módulo de curso no existe';
-$string['error/mod_notimplemented'] = 'El tipo del módulo indicado no está disponible para precondición';
-$string['error/bad_json_precondition'] = 'El JSON utilizado para configurar la precondición no es válido';
-$string['error/bad_settings_precondition'] = 'El JSON utilizado para configurar la precondición no tiene los campos requeridos';
-$string['error/user_notrequire'] = 'El usuario actual no requiere mensaje de precondición.';
-$string['satisfied'] = 'Actividad "{$a}" cumplida.';
+$string['period'] = 'Período';
+$string['pluginname'] = 'Mensaje de pre-condición';
+$string['precondition:addinstance'] = 'Adicionar un nuevo bloque de Precondición';
+$string['precondition:attend'] = 'Atender a una precondición';
+$string['precondition:myaddinstance'] = 'Agregar una nueva condición previa al panel';

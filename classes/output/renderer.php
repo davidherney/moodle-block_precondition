@@ -15,42 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Precondition block caps.
+ * Component renderer
  *
  * @package    block_precondition
  * @copyright  2024 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+namespace block_precondition\output;
 
-defined('MOODLE_INTERNAL') || die();
+use plugin_renderer_base;
 
-$capabilities = [
+/**
+ * Component renderer
+ *
+ * @copyright  2024 David Herney @ BambuCo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class renderer extends plugin_renderer_base {
 
-    'block/precondition:myaddinstance' => [
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => [
-            'user' => CAP_PREVENT,
-        ],
-    ],
+    /**
+     * Return the template content for the block.
+     *
+     * @param contents $contents The contents renderable
+     * @return string HTML string
+     */
+    public function render_contents(content $content) : string {
+        return $this->render_from_template('block_precondition/content', $content->export_for_template($this));
+    }
 
-    'block/precondition:addinstance' => [
-        'riskbitmask' => RISK_SPAM | RISK_XSS,
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => [
-            'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW,
-        ],
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    ],
-
-    'block/precondition:attend' => [
-        'riskbitmask' => RISK_SPAM,
-        'captype' => 'read',
-        'contextlevel' => CONTEXT_COURSE,
-        'archetypes' => [
-            'student' => CAP_ALLOW,
-        ],
-    ],
-];
+}
