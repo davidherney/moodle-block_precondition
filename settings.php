@@ -26,13 +26,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
-    $settings->add(
-        new admin_setting_configtextarea(
-            'block_precondition/moduleinfo',
-            get_string('moduleinfo', 'block_precondition'),
-            get_string('moduleinfo_help', 'block_precondition'), '', PARAM_RAW
-        )
-    );
 
     $settings->add(
         new admin_setting_configcheckbox(

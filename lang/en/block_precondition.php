@@ -30,10 +30,6 @@ $string['forecastdays'] = 'Forecast days';
 $string['forecastdays_help'] = 'Days to display the message before the activity ends.
 If the activity does not have an end date then this configuration will not be taken into account.';
 $string['gotocomplete'] = 'Go to complete';
-$string['moduleinfo'] = 'Module info';
-$string['moduleinfo_help'] = 'Information about conditioned module.
-The info structure is a valid json object with the fields:  courseid, cmid, name, description, descriptionformat.
-Other params depend of the module type.';
 $string['pluginname'] = 'Precondition';
 $string['precondition:addinstance'] = 'Add a new Precondition';
 $string['precondition:attend'] = 'Attend to Precondition';

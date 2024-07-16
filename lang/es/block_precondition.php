@@ -35,10 +35,6 @@ $string['forecastdays'] = 'Días de previsión';
 $string['forecastdays_help'] = 'Días para mostrar el mensaje antes de que finalice la actividad.
 Si la actividad no tiene fecha de finalización entonces esta configuración no será tenida en cuenta.';
 $string['gotocomplete'] = 'Ir a completar';
-$string['moduleinfo'] = 'Información del módulo';
-$string['moduleinfo_help'] = 'Información acerca del módulo en el que se basa la condición.
-La estructura de la información consiste de una cadena JSON válida que contenga un objeto con los campos:  courseid, cmid, name, description, descriptionformat.
-Otros parámetros pueden aplicar dependiendo del tipo de módulo.';
 $string['period'] = 'Período';
 $string['pluginname'] = 'Mensaje de pre-condición';
 $string['precondition:addinstance'] = 'Adicionar un nuevo bloque de Precondición';
