@@ -94,6 +94,9 @@ export const init = async() => {
         modal.show();
 
         return modal;
+    })
+    .fail(function() {
+        Log.error('Error creating modal');
     });
 
 };
