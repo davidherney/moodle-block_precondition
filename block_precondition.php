@@ -37,7 +37,7 @@ class block_precondition extends block_base {
      * Initialize the block.
      * @return void
      */
-    function init() {
+    public function init() {
         $this->title = get_string('pluginname', 'block_precondition');
     }
 
@@ -45,8 +45,8 @@ class block_precondition extends block_base {
      * Allow the block to have a configuration form.
      * @return bool
      */
-    function has_config() {
-      return true;
+    public function has_config() {
+        return true;
     }
 
     /**
@@ -56,7 +56,7 @@ class block_precondition extends block_base {
      *
      * @return array page-type prefix => true/false.
      */
-    function applicable_formats() {
+    public function applicable_formats() {
         return ['all' => true];
     }
 
@@ -65,7 +65,7 @@ class block_precondition extends block_base {
      *
      * @return bool
      */
-    function instance_allow_multiple() {
+    public function instance_allow_multiple() {
         return true;
     }
 
@@ -89,10 +89,10 @@ class block_precondition extends block_base {
      *
      * @return stdClass
      */
-    function get_content() {
+    public function get_content() {
         global $COURSE;
 
-        if ($this->content !== NULL) {
+        if ($this->content !== null) {
             return $this->content;
         }
 
@@ -190,20 +190,20 @@ class block_precondition extends block_base {
      *
      * @return bool
      */
-    function content_is_trusted() {
+    public function content_is_trusted() {
         global $SCRIPT;
 
         if (!$context = context::instance_by_id($this->instance->parentcontextid, IGNORE_MISSING)) {
             return false;
         }
-        //find out if this block is on the profile page
+        // Find out if this block is on the profile page.
         if ($context->contextlevel == CONTEXT_USER) {
             if ($SCRIPT === '/my/index.php') {
-                // this is exception - page is completely private, nobody else may see content there
-                // that is why we allow JS here
+                // This is exception - page is completely private, nobody else may see content there.
+                // That is why we allow JS here.
                 return true;
             } else {
-                // no JS on public personal pages, it would be a big security issue
+                // No JS on public personal pages, it would be a big security issue.
                 return false;
             }
         }
@@ -238,7 +238,7 @@ class block_precondition extends block_base {
      *
      * @return bool
      */
-    function instance_delete() {
+    public function instance_delete() {
 
         $fs = get_file_storage();
         $fs->delete_area_files($this->context->id, 'block_precondition');

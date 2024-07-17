@@ -62,13 +62,14 @@ class mod_page extends condition_base {
      *
      * @param int $id The id of the instance.
      * @param object $precondition The precondition object.
+     * @param object $context The context object.
      * @return bool
      */
     public function available($id, $precondition, $context): bool {
         global $PAGE;
 
-        // Is not available into the all mod_data pages.
-        if (property_exists($PAGE, 'cm') && $PAGE->cm->modname == 'page') {
+        // Is not available into the all mod_page pages.
+        if (is_object($PAGE->cm) && $PAGE->cm->modname == 'page') {
             return false;
         }
 
@@ -97,11 +98,11 @@ class mod_page extends condition_base {
     /**
      * Get the url to the instance.
      *
-     * @param int $instance The element instance id.
+     * @param int $instanceid The element instance id.
      * @return string
      */
     public function get_url(int $instanceid): string {
-        $cm = get_coursemodule_from_instance('data', $instanceid);
+        $cm = get_coursemodule_from_instance('page', $instanceid);
         if ($cm) {
             return (string)(new \moodle_url('/mod/page/view.php', ['id' => $cm->id]));
         }

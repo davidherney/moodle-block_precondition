@@ -32,8 +32,7 @@ $string['daily'] = 'Diario';
 $string['excludeadmins'] = 'Excluir administradores';
 $string['excludeadmins_help'] = 'Excluir administradores de la validación de condiciones previas.';
 $string['forecastdays'] = 'Días de previsión';
-$string['forecastdays_help'] = 'Días para mostrar el mensaje antes de que finalice la actividad.
-Si la actividad no tiene fecha de finalización entonces esta configuración no será tenida en cuenta.';
+$string['forecastdays_help'] = 'Días para mostrar el mensaje antes de que finalice la actividad. Si la actividad no tiene fecha de finalización entonces esta configuración no será tenida en cuenta.';
 $string['gotocomplete'] = 'Ir a completar';
 $string['period'] = 'Período';
 $string['pluginname'] = 'Mensaje de pre-condición';

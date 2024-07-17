@@ -23,9 +23,10 @@
  */
 
 /**
- * Specialised backup task for the precondition block
- * (requires encode_content_links in some configdata attrs)
+ * Specialised backup task for the precondition block (requires encode_content_links in some configdata attrs).
  *
+ * @copyright  2024 David Herney @ BambuCo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_precondition_block_task extends backup_block_task {
 
@@ -62,10 +63,10 @@ class backup_precondition_block_task extends backup_block_task {
     /**
      * Encode the content links.
      *
-     * @return array
+     * @param string $content
+     * @return string
      */
-    static public function encode_content_links($content) {
+    public static function encode_content_links($content) {
         return $content; // No special encoding of links.
     }
 }
-

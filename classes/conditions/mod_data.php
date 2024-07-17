@@ -62,13 +62,14 @@ class mod_data extends condition_base {
      *
      * @param int $id The id of the instance.
      * @param object $precondition The precondition object.
+     * @param object $context The context object.
      * @return bool
      */
     public function available($id, $precondition, $context): bool {
         global $PAGE;
 
         // Is not available into the all mod_data pages.
-        if (property_exists($PAGE, 'cm') && $PAGE->cm->modname == 'data') {
+        if (is_object($PAGE->cm) && $PAGE->cm->modname == 'data') {
             return false;
         }
 
@@ -105,7 +106,7 @@ class mod_data extends condition_base {
     /**
      * Get the url to the instance.
      *
-     * @param int $instance The element instance id.
+     * @param int $instanceid The element instance id.
      * @return string
      */
     public function get_url(int $instanceid): string {

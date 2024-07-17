@@ -56,13 +56,14 @@ class condition_base {
      *
      * @param int $id The id of the instance.
      * @param object $precondition The precondition object.
+     * @param object $context The context object.
      * @return bool
      */
     public function available($id, $precondition, $context): bool {
         global $USER;
 
         // If the user is not logged in, don't show the content.
-        if(!$USER || is_guest($context, $USER) || !isloggedin()) {
+        if (!$USER || is_guest($context, $USER) || !isloggedin()) {
             return false;
         }
 

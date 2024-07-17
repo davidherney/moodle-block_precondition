@@ -64,7 +64,7 @@ function loadStrings() {
  * Initialize the general controls.
  *
  */
-export const init = async () => {
+export const init = async() => {
 
     loadStrings();
 

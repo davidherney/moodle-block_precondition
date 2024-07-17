@@ -36,10 +36,10 @@ class renderer extends plugin_renderer_base {
     /**
      * Return the template content for the block.
      *
-     * @param contents $contents The contents renderable
+     * @param content $content The contents renderable
      * @return string HTML string
      */
-    public function render_contents(content $content) : string {
+    public function render_contents(content $content): string {
         return $this->render_from_template('block_precondition/content', $content->export_for_template($this));
     }
 

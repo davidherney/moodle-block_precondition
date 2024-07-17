@@ -36,6 +36,7 @@ var s = [];
 /**
  * Load strings from server.
  *
+ * @return {Promise} Promise that is resolved when the strings are loaded.
  */
 function loadStrings() {
 
@@ -52,9 +53,11 @@ function loadStrings() {
             });
 
             resolve(true);
+            return true;
         }).fail(function(e) {
             Log.debug('Error loading strings');
             Log.debug(e);
+            return false;
         });
     });
 }
@@ -64,7 +67,7 @@ function loadStrings() {
  * Initialize the component.
  *
  */
-export const init = async () => {
+export const init = async() => {
 
     var messages = [];
     $('.block_precondition-message').each(function() {
@@ -72,9 +75,10 @@ export const init = async () => {
         messages.push($message.html());
     });
 
-    await loadStrings();
+    await loadStrings().catch(() => null);
 
     var finalMessage = '<div class="block_precondition-message">' + messages.join('<hr>') + '</div>';
+
     ModalFactory.create({
         type: ModalFactory.types.CANCEL,
         body: finalMessage,

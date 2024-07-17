@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024072344;        // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires = 2022112808;        // Requires this Moodle version
-$plugin->component = 'block_precondition'; // Full name of the plugin (used for diagnostics)
+$plugin->version = 2024072344;
+$plugin->requires = 2022112808;
+$plugin->component = 'block_precondition';
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = 'a'; // First of: C, a, t, 4, l, i, n, ª releases
+$plugin->release = 'a'; // First of: C, a, t, 4, l, i, n, ª releases.

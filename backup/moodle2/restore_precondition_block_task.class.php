@@ -22,10 +22,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
- * Specialised restore task for the html block
- * (requires encode_content_links in some configdata attrs)
+ * Specialised restore task for the html block (requires encode_content_links in some configdata attrs).
  *
+ * @copyright  2024 David Herney @ BambuCo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_precondition_block_task extends restore_block_task {
 
@@ -64,7 +67,7 @@ class restore_precondition_block_task extends restore_block_task {
      *
      * @return array
      */
-    static public function define_decode_contents() {
+    public static function define_decode_contents() {
 
         $contents = [];
 
@@ -78,16 +81,20 @@ class restore_precondition_block_task extends restore_block_task {
      *
      * @return array
      */
-    static public function define_decode_rules() {
+    public static function define_decode_rules() {
         return [];
     }
 }
 
 /**
+ * Class specialised in decoding content for the precondition block.
+ *
  * Specialised restore_decode_content provider that unserializes the configdata
  * field, to serve the configdata->message content to the restore_decode_processor
- * packaging it back to its serialized form after process
+ * packaging it back to its serialized form after process.
  *
+ * @copyright  2024 David Herney @ BambuCo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_precondition_block_decode_content extends restore_decode_content {
 

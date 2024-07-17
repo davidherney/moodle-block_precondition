@@ -22,21 +22,20 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['all'] = 'All';
 $string['amount'] = 'Amount';
 $string['condition'] = 'Condition';
 $string['conditionmessage'] = 'Condition message';
+$string['conditionssatisfied'] = 'There are no pending conditions to attend to.';
 $string['conditionstitle'] = 'Actions';
+$string['daily'] = 'Daily';
+$string['excludeadmins'] = 'Exclude admins';
+$string['excludeadmins_help'] = 'Exclude admins from the precondition validation.';
 $string['forecastdays'] = 'Forecast days';
-$string['forecastdays_help'] = 'Days to display the message before the activity ends.
-If the activity does not have an end date then this configuration will not be taken into account.';
+$string['forecastdays_help'] = 'Days to display the message before the activity ends. If the activity does not have an end date then this configuration will not be taken into account.';
 $string['gotocomplete'] = 'Go to complete';
+$string['period'] = 'Period';
 $string['pluginname'] = 'Precondition';
 $string['precondition:addinstance'] = 'Add a new Precondition';
 $string['precondition:attend'] = 'Attend to Precondition';
 $string['precondition:myaddinstance'] = 'Add a new Precondition to Dashboard';
-$string['conditionssatisfied'] = 'There are no pending conditions to attend to.';
-$string['excludeadmins'] = 'Exclude admins';
-$string['excludeadmins_help'] = 'Exclude admins from the precondition validation.';
-$string['all'] = 'All';
-$string['daily'] = 'Daily';
-$string['period'] = 'Period';

@@ -15,8 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file keeps track of upgrades to
- * the blocks system
+ * This file keeps track of upgrades to the blocks system.
  *
  * Sometimes, changes between versions involve
  * alterations to database structures and other
@@ -34,12 +33,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
-
+/**
+ * Execute block_precondition upgrade from the given old version.
+ *
+ * @param int $oldversion
+ */
 function xmldb_block_precondition_upgrade($oldversion) {
-    global $CFG, $DB;
-
-    $dbman = $DB->get_manager();
 
     return true;
 }

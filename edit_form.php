@@ -22,6 +22,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// Disable the validation because js_call_amd doesn't work with the $this->page object.
+// phpcs:disable moodle.PHP.ForbiddenGlobalUse.BadGlobal
+
 /**
  * Form for editing block instances.
  *
@@ -87,19 +90,19 @@ class block_precondition_edit_form extends block_edit_form {
      * @param stdClass $defaults The default values.
      * @return void
      */
-    function set_data($defaults) {
+    public function set_data($defaults) {
 
         if (!empty($this->block->config) && !empty($this->block->config->message)) {
             $message = $this->block->config->message;
-            $draftid_editor = file_get_submitted_draft_itemid('config_message');
+            $draftideditor = file_get_submitted_draft_itemid('config_message');
             if (empty($message)) {
                 $currentmessage = '';
             } else {
                 $currentmessage = $message;
             }
-            $defaults->config_message['text'] = file_prepare_draft_area($draftid_editor, $this->block->context->id,
+            $defaults->config_message['text'] = file_prepare_draft_area($draftideditor, $this->block->context->id,
                                                         'block_precondition', 'message', 0, ['subdirs' => true], $currentmessage);
-            $defaults->config_message['itemid'] = $draftid_editor;
+            $defaults->config_message['itemid'] = $draftideditor;
             $defaults->config_message['format'] = $this->block->config->messageformat ?? FORMAT_MOODLE;
         } else {
             $message = '';

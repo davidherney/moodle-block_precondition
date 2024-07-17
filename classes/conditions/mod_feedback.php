@@ -62,6 +62,7 @@ class mod_feedback extends condition_base {
      *
      * @param int $id The id of the instance.
      * @param object $precondition The precondition object.
+     * @param object $context The context object.
      * @return bool
      */
     public function available($id, $precondition, $context): bool {
@@ -82,7 +83,7 @@ class mod_feedback extends condition_base {
         // The site has a different behavior.
         if ($COURSE->id == SITEID) {
 
-            if(!$USER || is_guest($context, $USER) || !isloggedin()) {
+            if (!$USER || is_guest($context, $USER) || !isloggedin()) {
 
                 // Anonymous feedback is not allowed.
                 if (!$CFG->feedback_allowfullanonymous) {
@@ -125,7 +126,7 @@ class mod_feedback extends condition_base {
     /**
      * Get the url to the instance.
      *
-     * @param int $instance The element instance id.
+     * @param int $instanceid The element instance id.
      * @return string
      */
     public function get_url(int $instanceid): string {

@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Implement plugin file controller.
  *
@@ -88,8 +86,9 @@ function block_precondition_pluginfile($course, $cm, $context, $filearea, $args,
 
 /**
  * Perform global search replace such as when migrating site to new URL.
- * @param  $search
- * @param  $replace
+ *
+ * @param string $search Text to search.
+ * @param string $replace Text to replace.
  * @return void
  */
 function block_precondition_global_db_replace($search, $replace) {
