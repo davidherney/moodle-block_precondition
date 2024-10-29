@@ -39,31 +39,29 @@ class block_precondition_edit_form extends block_edit_form {
      * @param object $mform the form being built.
      */
     protected function specific_definition($mform) {
-        global $PAGE;
 
-        $configcondition = $mform->addElement('select', 'config_condition', get_string('condition', 'block_precondition'), []);
+        $attrs = ['data-conditionselector' => 'true'];
+        $configcondition = $mform->addElement(
+                                                'select',
+                                                'config_condition',
+                                                get_string('condition', 'block_precondition'),
+                                                [],
+                                                $attrs
+                                            );
 
+        $elementlist = [];
         foreach (\block_precondition\controller::$supportedconditions as $type) {
             $classname = 'block_precondition\\conditions\\' . $type;
+            $elementlist[$type] = [];
             if (class_exists($classname)) {
                 $condition = new $classname();
                 $conditionname = $condition->get_name();
                 $conditionelements = $condition->get_elements($this->page->course->id);
-                $elementoptions = $condition->define_options($mform);
-
-                // Add special class to the element options.
-                foreach ($elementoptions as $elementfield) {
-                    $attrs = $elementfield->getAttributes();
-                    $attrs['data-condition'] = $type;
-
-                    // Tha class attribute is asigned to parent row.
-                    $attrs['class'] = 'block_precondition_condition_option conditiontype-' . $type;
-                    $elementfield->setAttributes($attrs);
-                }
 
                 if (!empty($conditionelements)) {
 
                     foreach ($conditionelements as $elementid => $elementname) {
+                        $elementlist[$type][] = $elementid;
                         $elementtext = $conditionname . ' - ' . $elementname;
                         $preconditionid = \block_precondition\controller::get_preconditionid($type, $elementid);
                         $configcondition->addOption($elementtext, $preconditionid, [
@@ -71,11 +69,26 @@ class block_precondition_edit_form extends block_edit_form {
                                                                                         'data-elementid' => $elementid,
                                                                                     ]);
                     }
+
+                    $elementoptions = $condition->define_options($mform);
+
+                    // Add special class to the element options.
+                    foreach ($elementoptions as $elementfield) {
+                        $attrs = $elementfield->getAttributes();
+                        $attrs['data-condition'] = $type;
+
+                        // Tha class attribute is asigned to parent row.
+                        $attrs['class'] = 'conditiontype-' . $type;
+                        $elementfield->setAttributes($attrs);
+
+                        foreach ($elementlist[$type] as $elementid) {
+                            $preconditionid = \block_precondition\controller::get_preconditionid($type, $elementid);
+                            $mform->hideIf($elementfield->getName(), 'config_condition', 'neq', $preconditionid);
+                        }
+                    }
                 }
             }
         }
-
-        $PAGE->requires->js_call_amd('block_precondition/selectcondition', 'init');
 
         $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES, 'noclean' => true, 'context' => $this->block->context];
         $mform->addElement('editor', 'config_message', get_string('conditionmessage', 'block_precondition'), null, $editoroptions);
