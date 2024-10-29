@@ -50,6 +50,7 @@ class block_precondition_edit_form extends block_edit_form {
                                             );
 
         $elementlist = [];
+        $elementoptionslist = [];
         foreach (\block_precondition\controller::$supportedconditions as $type) {
             $classname = 'block_precondition\\conditions\\' . $type;
             $elementlist[$type] = [];
@@ -61,32 +62,38 @@ class block_precondition_edit_form extends block_edit_form {
                 if (!empty($conditionelements)) {
 
                     foreach ($conditionelements as $elementid => $elementname) {
-                        $elementlist[$type][] = $elementid;
                         $elementtext = $conditionname . ' - ' . $elementname;
                         $preconditionid = \block_precondition\controller::get_preconditionid($type, $elementid);
+                        $elementlist[$type][] = $preconditionid;
                         $configcondition->addOption($elementtext, $preconditionid, [
                                                                                         'data-condition' => $type,
                                                                                         'data-elementid' => $elementid,
                                                                                     ]);
                     }
 
-                    $elementoptions = $condition->define_options($mform);
+                    $elementoptionslist[$type] = $condition->define_options($mform);
+                }
+            }
+        }
 
-                    // Add special class to the element options.
-                    foreach ($elementoptions as $elementfield) {
-                        $attrs = $elementfield->getAttributes();
-                        $attrs['data-condition'] = $type;
+        // Add special class to the element options.
+        foreach ($elementoptionslist as $type => $optionslist) {
 
-                        // Tha class attribute is asigned to parent row.
-                        $attrs['class'] = 'conditiontype-' . $type;
-                        $elementfield->setAttributes($attrs);
+            foreach ($optionslist as $elementfield) {
+                $attrs = $elementfield->getAttributes();
+                $attrs['data-condition'] = $type;
 
-                        foreach ($elementlist[$type] as $elementid) {
-                            $preconditionid = \block_precondition\controller::get_preconditionid($type, $elementid);
-                            $mform->hideIf($elementfield->getName(), 'config_condition', 'neq', $preconditionid);
-                        }
+                // Tha class attribute is asigned to parent row.
+                $attrs['class'] = 'conditiontype-' . $type;
+                $elementfield->setAttributes($attrs);
+
+                $in = [];
+                foreach ($elementlist as $typeelement => $elementid) {
+                    if ($typeelement != $type) {
+                        $in = array_merge($in, $elementid);
                     }
                 }
+                $mform->hideIf($elementfield->getName(), 'config_condition', 'in', $in);
             }
         }
 
