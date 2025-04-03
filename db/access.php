@@ -42,7 +42,7 @@ $capabilities = [
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
         ],
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
     ],
 
     'block/precondition:attend' => [

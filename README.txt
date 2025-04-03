@@ -19,6 +19,9 @@ IN VERSION
 2024072346:
 New 'Once per session' precondition type.
 
+2024072345:
+Compatibility with Moodle 4.3+
+
 2024072344:
 Custom settings in the block edit form.
 
@@ -41,4 +44,4 @@ Releases: C, a, t, 4, l, i, n, ª
 
 C: the first release
 a: Moodle 4.1+ version
-t: New precondition types
+t: Moodle 4.3+ version
