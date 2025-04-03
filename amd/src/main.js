@@ -80,7 +80,7 @@ export const init = async() => {
     var finalMessage = '<div class="block_precondition-message">' + messages.join('<hr>') + '</div>';
 
     ModalFactory.create({
-        type: ModalFactory.types.CANCEL,
+        type: ModalFactory.types.ALERT,
         body: finalMessage,
         title: s.conditionstitle,
     })

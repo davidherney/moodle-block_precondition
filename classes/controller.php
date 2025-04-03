@@ -41,6 +41,7 @@ class controller {
         'mod_feedback',
         'mod_data',
         'mod_page',
+        'session',
     ];
 
     /**

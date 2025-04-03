@@ -75,7 +75,7 @@ class block_precondition extends block_base {
      * For instance: if your block will have different title's depending on location (site, course, blog, etc)
      */
     public function specialization() {
-        if (empty($this->config->message)) {
+        if (empty($this->config->message) || empty($this->config->condition)) {
             $this->title = get_string('pluginname', 'block_precondition');
         } else if ($this->config->condition) {
             $this->title = get_string('conditionstitle', 'block_precondition');
@@ -121,8 +121,16 @@ class block_precondition extends block_base {
             }
         }
 
+        if (empty($this->config->condition)) {
+            return $this->content;
+        }
+
         $preconditiontype = controller::get_preconditiontype($this->config->condition);
         $elementid = controller::get_elementid($this->config->condition);
+
+        if (empty($preconditiontype) || empty($elementid)) {
+            return $this->content;
+        }
 
         $precondition = controller::get_condition($preconditiontype);
 
@@ -131,7 +139,7 @@ class block_precondition extends block_base {
             return $this->content;
         }
 
-        $satisfied = $precondition->satisfied($elementid, $this->config);
+        $satisfied = $precondition->satisfied($elementid, $this->config, $this->context);
 
         // If the condition is satisfied, don't show the content.
         if ($satisfied) {

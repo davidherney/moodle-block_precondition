@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024072345;
+$plugin->version = 2024072346;
 $plugin->requires = 2022112808;
 $plugin->component = 'block_precondition';
-$plugin->maturity = MATURITY_RC;
+$plugin->maturity = MATURITY_STABLE;
 $plugin->release = 't'; // First of: C, a, t, 4, l, i, n, ª releases.
