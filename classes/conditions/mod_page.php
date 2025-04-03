@@ -90,7 +90,7 @@ class mod_page extends condition_base {
                                                                 'objectid' => $id,
                                                                 'component' => 'mod_page',
                                                                 'userid' => $USER->id,
-                                                                'action' => 'viewed'
+                                                                'action' => 'viewed',
                                                             ]);
 
         return $count > 0;
