@@ -2,7 +2,7 @@ Block Precondition
 ============================
 A moodle block to display a message if a defined condition is not satisfied.
 
-Package tested on: moodle 4.1+, 4.3+.
+Package tested on: moodle 4.1+, 4.3+, 4.5+.
 
 QUICK INSTALL
 ==============
@@ -18,6 +18,7 @@ IN VERSION
 =============
 2024072346:
 New 'Once per session' precondition type.
+Compatibility with Moodle 4.5+
 
 2024072345:
 Compatibility with Moodle 4.3+
@@ -44,4 +45,4 @@ Releases: C, a, t, 4, l, i, n, ª
 
 C: the first release
 a: Moodle 4.1+ version
-t: Moodle 4.3+ version
+t: Moodle [4.3+, 4.5] version
