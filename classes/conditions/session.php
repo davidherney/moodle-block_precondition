@@ -56,6 +56,7 @@ class session extends condition_base {
      *
      * @param int $id The id of the instance.
      * @param object $precondition The precondition object.
+     * @param object $context The block context object.
      * @return bool
      */
     public function satisfied($id, $precondition, $context): bool {
