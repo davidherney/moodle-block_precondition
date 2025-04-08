@@ -14,18 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace block_precondition\privacy;
+
+use core_privacy\local\metadata\null_provider;
+
 /**
- * Version details
+ * Privacy Subsystem for block_precondition implementing null_provider.
  *
  * @package    block_precondition
- * @copyright  2020 David Herney - cirano
+ * @copyright  2025 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class provider implements null_provider {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version = 2024072346.01;
-$plugin->requires = 2022112808;
-$plugin->component = 'block_precondition';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = 't'; // First of: C, a, t, 4, l, i, n, ª releases.
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason(): string {
+        return 'privacy:metadata';
+    }
+}

@@ -41,3 +41,4 @@ $string['pluginname'] = 'Precondition';
 $string['precondition:addinstance'] = 'Add a new Precondition';
 $string['precondition:attend'] = 'Attend to Precondition';
 $string['precondition:myaddinstance'] = 'Add a new Precondition to Dashboard';
+$string['privacy:metadata'] = 'The Precondition plugin doesn\'t store any personal data.';

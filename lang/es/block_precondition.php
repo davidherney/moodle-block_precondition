@@ -41,3 +41,4 @@ $string['pluginname'] = 'Mensaje de pre-condición';
 $string['precondition:addinstance'] = 'Adicionar un nuevo bloque de Precondición';
 $string['precondition:attend'] = 'Atender a una precondición';
 $string['precondition:myaddinstance'] = 'Agregar una nueva condición previa al panel';
+$string['privacy:metadata'] = 'El plugin de Precondición no almacena ningún dato personal.';
