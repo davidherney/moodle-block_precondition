@@ -73,7 +73,7 @@ function block_precondition_pluginfile($course, $cm, $context, $filearea, $args,
             'component' => 'block_precondition',
             'filearea' => $filearea,
             'filepath' => '/',
-            'filename' => $relativepath
+            'filename' => $relativepath,
         ], MUST_EXIST);
 
     if (!($file = $fs->get_file_by_id($fileid)) || $file->is_directory()) {
