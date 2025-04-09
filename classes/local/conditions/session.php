@@ -14,23 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Base class to control the conditions.
- *
- * @package    block_precondition
- * @copyright  2024 David Herney @ BambuCo
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-namespace block_precondition;
+namespace block_precondition\local\conditions;
+
+use block_precondition\local\condition_base;
 
 /**
- * Base class to control the conditions.
+ * Class session
  *
  * @package    block_precondition
- * @copyright  2024 David Herney @ BambuCo
+ * @copyright  2025 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class condition_base {
+class session extends condition_base {
 
     /**
      * Get the name of the condition.
@@ -38,7 +33,7 @@ class condition_base {
      * @return string
      */
     public function get_name(): string {
-        return static::class;
+        return get_string('conditionsession', 'block_precondition');
     }
 
     /**
@@ -48,7 +43,12 @@ class condition_base {
      * @return array The key is the id of the element and the value is the name of the element.
      */
     public function get_elements($courseid): array {
-        return [];
+
+        $values = [
+            '1' => get_string('conditionsession_one', 'block_precondition'),
+        ];
+
+        return $values;
     }
 
     /**
@@ -60,13 +60,6 @@ class condition_base {
      * @return bool
      */
     public function available($id, $precondition, $context): bool {
-        global $USER;
-
-        // If the user is not logged in, don't show the content.
-        if (!$USER || is_guest($context, $USER) || !isloggedin()) {
-            return false;
-        }
-
         return true;
     }
 
@@ -79,27 +72,25 @@ class condition_base {
      * @return bool
      */
     public function satisfied($id, $precondition, $context): bool {
-        return false;
-    }
 
-    /**
-     * Get the url to the instance.
-     *
-     * @param int $instance The element instance id.
-     * @return string
-     */
-    public function get_url(int $instance): string {
-        return '';
-    }
+        $cache = \cache::make('block_precondition', 'conditionsession');
+        $data = $cache->get('satisfied');
 
-    /**
-     * Define the options for the condition.
-     *
-     * @param object $mform The form object.
-     * @return array List of elements.
-     */
-    public function define_options($mform): array {
-        return [];
+        if (!$data) {
+            $result = $cache->set('satisfied', []);
+            if (!$result) {
+                return false;
+            }
+            $data = [];
+        }
+
+        if (!isset($data[$context->id])) {
+            $data[$context->id] = true;
+            $cache->set('satisfied', $data);
+            return false;
+        }
+
+        return true;
     }
 
 }

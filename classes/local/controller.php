@@ -21,7 +21,7 @@
  * @copyright  2024 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace block_precondition;
+namespace block_precondition\local;
 
 /**
  * Component controller.
@@ -56,7 +56,7 @@ class controller {
             return null;
         }
 
-        $classname = 'block_precondition\\conditions\\' . $type;
+        $classname = 'block_precondition\\local\\conditions\\' . $type;
         if (class_exists($classname)) {
             $condition = new $classname();
 

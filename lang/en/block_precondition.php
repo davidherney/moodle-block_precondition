@@ -24,6 +24,7 @@
 
 $string['all'] = 'All';
 $string['amount'] = 'Amount';
+$string['cachedef_conditionsession'] = 'Cache for session condition';
 $string['condition'] = 'Condition';
 $string['conditionmessage'] = 'Condition message';
 $string['conditionsession'] = 'Session';

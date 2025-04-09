@@ -21,9 +21,9 @@
  * @copyright  2024 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace block_precondition\conditions;
+namespace block_precondition\local\conditions;
 
-use block_precondition\condition_base;
+use block_precondition\local\condition_base;
 
 /**
  * Class responsible for manage the specific condition.

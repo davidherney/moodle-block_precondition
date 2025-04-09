@@ -14,18 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace block_precondition\conditions;
-
-use block_precondition\condition_base;
-
 /**
- * Class session
+ * Base class to control the conditions.
  *
  * @package    block_precondition
- * @copyright  2025 David Herney @ BambuCo
+ * @copyright  2024 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class session extends condition_base {
+namespace block_precondition\local;
+
+/**
+ * Base class to control the conditions.
+ *
+ * @package    block_precondition
+ * @copyright  2024 David Herney @ BambuCo
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class condition_base {
 
     /**
      * Get the name of the condition.
@@ -33,7 +38,7 @@ class session extends condition_base {
      * @return string
      */
     public function get_name(): string {
-        return get_string('conditionsession', 'block_precondition');
+        return static::class;
     }
 
     /**
@@ -43,12 +48,26 @@ class session extends condition_base {
      * @return array The key is the id of the element and the value is the name of the element.
      */
     public function get_elements($courseid): array {
+        return [];
+    }
 
-        $values = [
-            '1' => get_string('conditionsession_one', 'block_precondition'),
-        ];
+    /**
+     * Check if the condition is available.
+     *
+     * @param int $id The id of the instance.
+     * @param object $precondition The precondition object.
+     * @param object $context The context object.
+     * @return bool
+     */
+    public function available($id, $precondition, $context): bool {
+        global $USER;
 
-        return $values;
+        // If the user is not logged in, don't show the content.
+        if (!$USER || isguestuser($USER->id) || !isloggedin()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -60,18 +79,27 @@ class session extends condition_base {
      * @return bool
      */
     public function satisfied($id, $precondition, $context): bool {
-        global $SESSION;
+        return false;
+    }
 
-        if (!property_exists($SESSION, 'block_precondition_satisfied')) {
-            $SESSION->block_precondition_satisfied = [];
-        }
+    /**
+     * Get the url to the instance.
+     *
+     * @param int $instance The element instance id.
+     * @return string
+     */
+    public function get_url(int $instance): string {
+        return '';
+    }
 
-        if (!isset($SESSION->block_precondition_satisfied[$context->id])) {
-            $SESSION->block_precondition_satisfied[$context->id] = true;
-            return false;
-        }
-
-        return true;
+    /**
+     * Define the options for the condition.
+     *
+     * @param object $mform The form object.
+     * @return array List of elements.
+     */
+    public function define_options($mform): array {
+        return [];
     }
 
 }

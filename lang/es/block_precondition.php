@@ -24,6 +24,7 @@
 
 $string['all'] = 'Todos';
 $string['amount'] = 'Cantidad de registros';
+$string['cachedef_conditionsession'] = 'Caché para la condición: sesión';
 $string['condition'] = 'Condición';
 $string['conditionmessage'] = 'Mensaje de condición';
 $string['conditionsession'] = 'Sesión';

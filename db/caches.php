@@ -15,18 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Cache definitions for Precondition
+ *
+ * Documentation: {@link https://docs.moodle.org/dev/Cache_API}
  *
  * @package    block_precondition
- * @copyright  2020 David Herney - cirano
+ * @category   cache
+ * @copyright  2025 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024072346.04;
-$plugin->requires = 2022112808;
-$plugin->component = 'block_precondition';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = 't'; // First of: C, a, t, 4, l, i, n, ª releases.
-$plugin->supported = [401, 405];
+$definitions = [
+    'conditionsession' => [
+        'mode' => cache_store::MODE_SESSION,
+        'simplekeys' => true,
+        'simpledata' => true,
+    ]
+];

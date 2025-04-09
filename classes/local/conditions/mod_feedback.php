@@ -21,9 +21,9 @@
  * @copyright  2024 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace block_precondition\conditions;
+namespace block_precondition\local\conditions;
 
-use block_precondition\condition_base;
+use block_precondition\local\condition_base;
 
 /**
  * Class responsible for manage the specific condition.
@@ -32,7 +32,7 @@ use block_precondition\condition_base;
  * @copyright  2024 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_data extends condition_base {
+class mod_feedback extends condition_base {
 
     /**
      * Get the name of the condition.
@@ -40,7 +40,7 @@ class mod_data extends condition_base {
      * @return string
      */
     public function get_name(): string {
-        return get_string('pluginname', 'mod_data');
+        return get_string('pluginname', 'mod_feedback');
     }
 
     /**
@@ -52,9 +52,9 @@ class mod_data extends condition_base {
     public function get_elements($courseid): array {
         global $DB;
 
-        $records = $DB->get_records_menu('data', ['course' => $courseid], 'name', 'id, name');
+        $feedbacks = $DB->get_records_menu('feedback', ['course' => $courseid], 'name', 'id, name');
 
-        return $records;
+        return $feedbacks;
     }
 
     /**
@@ -66,14 +66,48 @@ class mod_data extends condition_base {
      * @return bool
      */
     public function available($id, $precondition, $context): bool {
-        global $PAGE;
+        global $COURSE, $DB, $CFG, $USER, $PAGE;
 
-        // Is not available into the all mod_data pages.
-        if (is_object($PAGE->cm) && $PAGE->cm->modname == 'data') {
+        // Is not available into the feedback complete page.
+        if ($PAGE->pagetype == 'mod-feedback-complete') {
             return false;
         }
 
-        return parent::available($id, $precondition, $context);
+        $feedback = $DB->get_record('feedback', ['id' => $id]);
+
+        // The feedback doesn't exist.
+        if (!$feedback) {
+            return false;
+        }
+
+        // The site has a different behavior.
+        if ($COURSE->id == SITEID) {
+
+            if (!$USER || isguestuser($USER->id) || !isloggedin()) {
+
+                // Anonymous feedback is not allowed.
+                if (!$CFG->feedback_allowfullanonymous) {
+                    return false;
+                }
+
+                // If the feedback is not allowed to be answered anonymously, don't show the content.
+                if ($feedback->anonymous != 1) {
+                    return false;
+                }
+            }
+        }
+
+        // If the feedback is not configured to end, don't check cast days.
+        if (!$feedback->timeclose) {
+            return true;
+        }
+
+        // If the forecast days is not set, don't check.
+        if (!property_exists($precondition, 'mod_feedback_forecastdays') || $precondition->mod_feedback_forecastdays == 0) {
+            return true;
+        }
+
+        return ($feedback->timeclose - $precondition->mod_feedback_forecastdays * 24 * 60 * 60) < time();
     }
 
     /**
@@ -86,22 +120,8 @@ class mod_data extends condition_base {
      */
     public function satisfied($id, $precondition, $context): bool {
         global $DB, $USER;
-
-        $period = !property_exists($precondition, 'mod_data_period') ? null : $precondition->mod_data_period;
-        $records = !property_exists($precondition, 'mod_data_amount') ? 1 : $precondition->mod_data_amount;
-
-        $count = 0;
-        switch ($period) {
-            case 'daily':
-                $select = "dataid = :dataid AND userid = :userid AND timecreated >= :startdate";
-                $params = ['dataid' => $id, 'userid' => $USER->id, 'startdate' => mktime(0, 0, 0)];
-                $count = $DB->count_records_select('data_records', $select, $params);
-                break;
-            default:
-                $count = $DB->count_records('data_records', ['dataid' => $id, 'userid' => $USER->id]);
-        }
-
-        return $count >= $records;
+        $records = $DB->count_records('feedback_completed', ['feedback' => $id, 'userid' => $USER->id]);
+        return $records > 0;
     }
 
     /**
@@ -111,9 +131,9 @@ class mod_data extends condition_base {
      * @return string
      */
     public function get_url(int $instanceid): string {
-        $cm = get_coursemodule_from_instance('data', $instanceid);
+        $cm = get_coursemodule_from_instance('feedback', $instanceid);
         if ($cm) {
-            return (string)(new \moodle_url('/mod/data/edit.php', ['id' => $cm->id]));
+            return (string)(new \moodle_url('/mod/feedback/complete.php', ['id' => $cm->id]));
         }
 
         return '';
@@ -126,16 +146,11 @@ class mod_data extends condition_base {
      * @return array List of elements.
      */
     public function define_options($mform): array {
-        $amount = $mform->addElement('text', 'config_mod_data_amount', get_string('amount', 'block_precondition'));
-        $mform->setType('config_mod_data_amount', PARAM_INT);
+        $element = $mform->addElement('text', 'config_mod_feedback_forecastdays', get_string('forecastdays', 'block_precondition'));
+        $mform->setType('config_mod_feedback_forecastdays', PARAM_INT);
+        $mform->addHelpButton('config_mod_feedback_forecastdays', 'forecastdays', 'block_precondition');
 
-        $periods = [
-            'daily' => get_string('daily', 'block_precondition'),
-            'all' => get_string('all', 'block_precondition'),
-        ];
-        $periods = $mform->addElement('select', 'config_mod_data_period', get_string('period', 'block_precondition'), $periods);
-
-        return [$amount, $periods];
+        return [$element];
     }
 
 }

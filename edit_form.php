@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use block_precondition\local\controller;
+
 // Disable the validation because js_call_amd doesn't work with the $this->page object.
 // phpcs:disable moodle.PHP.ForbiddenGlobalUse.BadGlobal
 
@@ -51,8 +53,8 @@ class block_precondition_edit_form extends block_edit_form {
 
         $elementlist = [];
         $elementoptionslist = [];
-        foreach (\block_precondition\controller::$supportedconditions as $type) {
-            $classname = 'block_precondition\\conditions\\' . $type;
+        foreach (controller::$supportedconditions as $type) {
+            $classname = 'block_precondition\\local\\conditions\\' . $type;
             $elementlist[$type] = [];
             if (class_exists($classname)) {
                 $condition = new $classname();
@@ -63,7 +65,7 @@ class block_precondition_edit_form extends block_edit_form {
 
                     foreach ($conditionelements as $elementid => $elementname) {
                         $elementtext = $conditionname . ' - ' . $elementname;
-                        $preconditionid = \block_precondition\controller::get_preconditionid($type, $elementid);
+                        $preconditionid = controller::get_preconditionid($type, $elementid);
                         $elementlist[$type][] = $preconditionid;
                         $configcondition->addOption($elementtext, $preconditionid, [
                                                                                         'data-condition' => $type,
