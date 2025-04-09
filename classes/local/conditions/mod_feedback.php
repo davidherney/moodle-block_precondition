@@ -52,6 +52,10 @@ class mod_feedback extends condition_base {
     public function get_elements($courseid): array {
         global $DB;
 
+        if (!$this->enabled()) {
+            return [];
+        }
+
         $feedbacks = $DB->get_records_menu('feedback', ['course' => $courseid], 'name', 'id, name');
 
         return $feedbacks;
@@ -70,6 +74,10 @@ class mod_feedback extends condition_base {
 
         // Is not available into the feedback complete page.
         if ($PAGE->pagetype == 'mod-feedback-complete') {
+            return false;
+        }
+
+        if (!$this->enabled()) {
             return false;
         }
 
@@ -108,6 +116,19 @@ class mod_feedback extends condition_base {
         }
 
         return ($feedback->timeclose - $precondition->mod_feedback_forecastdays * 24 * 60 * 60) < time();
+    }
+
+    /**
+     * Check if the condition is enabled.
+     *
+     * @return bool
+     */
+    public function enabled(): bool {
+        global $DB;
+
+        // Check if the feedback module exist and is visible.
+        $enabled = $DB->get_field('modules', 'visible', ['name' => 'feedback']);
+        return !empty($enabled);
     }
 
     /**

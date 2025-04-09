@@ -15,8 +15,8 @@ Download zip package, extract the precondition folder and upload this folder int
 ## In version
 
 ### 2024072346:
-New 'Once per session' precondition type.
-Compatibility with Moodle 4.5+
+* New 'Once per session' precondition type.
+* Compatibility with Moodle 4.5+
 
 ### 2024072345:
 Compatibility with Moodle 4.3+

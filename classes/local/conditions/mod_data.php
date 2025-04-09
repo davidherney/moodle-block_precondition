@@ -52,6 +52,10 @@ class mod_data extends condition_base {
     public function get_elements($courseid): array {
         global $DB;
 
+        if (!$this->enabled()) {
+            return [];
+        }
+
         $records = $DB->get_records_menu('data', ['course' => $courseid], 'name', 'id, name');
 
         return $records;
@@ -73,7 +77,24 @@ class mod_data extends condition_base {
             return false;
         }
 
+        if (!$this->enabled()) {
+            return false;
+        }
+
         return parent::available($id, $precondition, $context);
+    }
+
+    /**
+     * Check if the condition is enabled.
+     *
+     * @return bool
+     */
+    public function enabled(): bool {
+        global $DB;
+
+        // Check if the data module exist and is visible.
+        $enabled = $DB->get_field('modules', 'visible', ['name' => 'data']);
+        return !empty($enabled);
     }
 
     /**

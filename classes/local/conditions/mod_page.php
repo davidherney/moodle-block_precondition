@@ -52,6 +52,10 @@ class mod_page extends condition_base {
     public function get_elements($courseid): array {
         global $DB;
 
+        if (!$this->enabled()) {
+            return [];
+        }
+
         $records = $DB->get_records_menu('page', ['course' => $courseid], 'name', 'id, name');
 
         return $records;
@@ -73,8 +77,39 @@ class mod_page extends condition_base {
             return false;
         }
 
+        if (!$this->enabled()) {
+            return false;
+        }
+
         return parent::available($id, $precondition, $context);
     }
+
+    /**
+     * Check if the condition is enabled.
+     *
+     * @return bool
+     */
+    public function enabled(): bool {
+        global $DB;
+
+        // Check if the page module exist and is visible.
+        $enabled = $DB->get_field('modules', 'visible', ['name' => 'page']);
+
+        if (!$enabled) {
+            return false;
+        }
+
+        $logplugins = get_config('tool_log', 'enabled_stores');
+        if (empty($logplugins)) {
+            return false;
+        }
+        $logplugins = explode(',', $logplugins);
+        if (!in_array('logstore_standard', $logplugins)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Check if the condition is satisfied.
      *

@@ -71,6 +71,15 @@ class condition_base {
     }
 
     /**
+     * Check if the condition is enabled.
+     *
+     * @return bool
+     */
+    public function enabled(): bool {
+        return true;
+    }
+
+    /**
      * Check if the condition is satisfied.
      *
      * @param int $id The id of the instance.
