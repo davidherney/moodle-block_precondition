@@ -29,4 +29,4 @@ $plugin->requires = 2022112808;
 $plugin->component = 'block_precondition';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = 't'; // First of: C, a, t, 4, l, i, n, ª releases.
-$plugin->supported = [401, 405];
+$plugin->supported = [405, 405];
