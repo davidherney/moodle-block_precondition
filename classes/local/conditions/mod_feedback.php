@@ -102,6 +102,11 @@ class mod_feedback extends condition_base {
             }
         }
 
+        $feedbackcompletion = new \mod_feedback_completion($feedback, null, $COURSE->id);
+        if (!$feedbackcompletion->can_complete()) {
+            return false;
+        }
+
         // If the feedback is not configured to end, don't check cast days.
         if (!$feedback->timeclose) {
             return true;

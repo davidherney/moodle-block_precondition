@@ -111,11 +111,15 @@ class block_precondition extends block_base {
             }
         }
 
+        if (!property_exists($this->config, 'message') || !property_exists($this->config, 'condition')) {
+            return $this->content;
+        }
+
         // The capability to attend is not required in site level in order to show the message to guests.
         if ($COURSE->id != SITEID) {
             $attend = has_capability('block/precondition:attend', $this->context);
 
-            if (!$attend || !$this->config->message && $this->config->condition) {
+            if (!$attend || (empty($this->config->message) && $this->config->condition)) {
                 return $this->content;
             }
         }

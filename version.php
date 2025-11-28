@@ -24,9 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024072348;
-$plugin->requires = 2022112808;
+$plugin->version = 2024072349;
+$plugin->requires = 2024100707; // Moodle 4.5 release.
 $plugin->component = 'block_precondition';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 't'; // First of: C, a, t, 4, l, i, n, ª releases.
-$plugin->supported = [405, 405];
+$plugin->release = 'A'; // First of: C, a, t, A, l, i, n, ª releases.
+$plugin->supported = [405, 500];
