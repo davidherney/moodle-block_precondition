@@ -33,7 +33,6 @@ use block_precondition\local\condition_base;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_data extends condition_base {
-
     /**
      * Get the name of the condition.
      *
@@ -158,5 +157,4 @@ class mod_data extends condition_base {
 
         return [$amount, $periods];
     }
-
 }

@@ -29,7 +29,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_precondition_block_task extends backup_block_task {
-
     /**
      * No specific settings for this task
      */

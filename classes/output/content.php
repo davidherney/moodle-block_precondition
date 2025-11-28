@@ -34,7 +34,6 @@ use templatable;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content implements renderable, templatable {
-
     /**
      * The message to show.
      *
@@ -76,7 +75,6 @@ class content implements renderable, templatable {
      * @return array Context variables for the template
      */
     public function export_for_template(renderer_base $output) {
-
         $defaultvariables = [
             'message' => $this->message,
             'satisfied' => $this->satisfied,

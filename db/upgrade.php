@@ -39,6 +39,5 @@
  * @param int $oldversion
  */
 function xmldb_block_precondition_upgrade($oldversion) {
-
     return true;
 }

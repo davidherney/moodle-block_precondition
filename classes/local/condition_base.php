@@ -31,7 +31,6 @@ namespace block_precondition\local;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class condition_base {
-
     /**
      * Get the name of the condition.
      *
@@ -110,5 +109,4 @@ class condition_base {
     public function define_options($mform): array {
         return [];
     }
-
 }

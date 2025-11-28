@@ -68,16 +68,21 @@ function block_precondition_pluginfile($course, $cm, $context, $filearea, $args,
     $fs = get_file_storage();
     $relativepath = implode('/', $args);
 
-    $fileid = $DB->get_field('files', 'id', [
+    $fileid = $DB->get_field(
+        'files',
+        'id',
+        [
             'contextid' => $context->id,
             'component' => 'block_precondition',
             'filearea' => $filearea,
             'filepath' => '/',
             'filename' => $relativepath,
-        ], MUST_EXIST);
+        ],
+        MUST_EXIST
+    );
 
     if (!($file = $fs->get_file_by_id($fileid)) || $file->is_directory()) {
-            return false;
+        return false;
     }
 
     \core\session\manager::write_close();
@@ -99,8 +104,14 @@ function block_precondition_global_db_replace($search, $replace) {
         $config = unserialize_object(base64_decode($instance->configdata));
         if (isset($config->message) && is_string($config->message)) {
             $config->message = str_replace($search, $replace, $config->message);
-            $DB->update_record('block_instances', ['id' => $instance->id,
-                    'configdata' => base64_encode(serialize($config)), 'timemodified' => time()]);
+            $DB->update_record(
+                'block_instances',
+                [
+                    'id' => $instance->id,
+                    'configdata' => base64_encode(serialize($config)),
+                    'timemodified' => time(),
+                ]
+            );
         }
     }
     $instances->close();

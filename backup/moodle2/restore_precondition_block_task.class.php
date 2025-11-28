@@ -31,7 +31,6 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_precondition_block_task extends restore_block_task {
-
     /**
      * No specific settings for this task
      */
@@ -68,9 +67,7 @@ class restore_precondition_block_task extends restore_block_task {
      * @return array
      */
     public static function define_decode_contents() {
-
         $contents = [];
-
         $contents[] = new restore_precondition_block_decode_content('block_instances', 'configdata', 'block_instance');
 
         return $contents;
@@ -97,7 +94,6 @@ class restore_precondition_block_task extends restore_block_task {
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_precondition_block_decode_content extends restore_decode_content {
-
     /**
      * Temp storage for unserialized configdata
      * @var object

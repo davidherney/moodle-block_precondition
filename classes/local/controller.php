@@ -31,7 +31,6 @@ namespace block_precondition\local;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class controller {
-
     /**
      * Currently supported modules.
      *
@@ -51,7 +50,6 @@ class controller {
      * @return object|null
      */
     public static function get_condition($type): ?object {
-
         if (!in_array($type, self::$supportedconditions)) {
             return null;
         }

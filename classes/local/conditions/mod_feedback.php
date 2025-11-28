@@ -33,7 +33,6 @@ use block_precondition\local\condition_base;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_feedback extends condition_base {
-
     /**
      * Get the name of the condition.
      *
@@ -90,9 +89,7 @@ class mod_feedback extends condition_base {
 
         // The site has a different behavior.
         if ($COURSE->id == SITEID) {
-
             if (!$USER || isguestuser($USER->id) || !isloggedin()) {
-
                 // Anonymous feedback is not allowed.
                 if (!$CFG->feedback_allowfullanonymous) {
                     return false;
@@ -173,5 +170,4 @@ class mod_feedback extends condition_base {
 
         return [$element];
     }
-
 }

@@ -34,22 +34,20 @@ use block_precondition\local\controller;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_precondition_edit_form extends block_edit_form {
-
     /**
      * Form fields specific to this type of block.
      *
      * @param object $mform the form being built.
      */
     protected function specific_definition($mform) {
-
         $attrs = ['data-conditionselector' => 'true'];
         $configcondition = $mform->addElement(
-                                                'select',
-                                                'config_condition',
-                                                get_string('condition', 'block_precondition'),
-                                                [],
-                                                $attrs
-                                            );
+            'select',
+            'config_condition',
+            get_string('condition', 'block_precondition'),
+            [],
+            $attrs
+        );
 
         $elementlist = [];
         $elementoptionslist = [];
@@ -62,15 +60,18 @@ class block_precondition_edit_form extends block_edit_form {
                 $conditionelements = $condition->get_elements($this->page->course->id);
 
                 if (!empty($conditionelements)) {
-
                     foreach ($conditionelements as $elementid => $elementname) {
                         $elementtext = $conditionname . ' - ' . $elementname;
                         $preconditionid = controller::get_preconditionid($type, $elementid);
                         $elementlist[$type][] = $preconditionid;
-                        $configcondition->addOption($elementtext, $preconditionid, [
-                                                                                        'data-condition' => $type,
-                                                                                        'data-elementid' => $elementid,
-                                                                                    ]);
+                        $configcondition->addOption(
+                            $elementtext,
+                            $preconditionid,
+                            [
+                                'data-condition' => $type,
+                                'data-elementid' => $elementid,
+                            ]
+                        );
                     }
 
                     $elementoptionslist[$type] = $condition->define_options($mform);
@@ -80,7 +81,6 @@ class block_precondition_edit_form extends block_edit_form {
 
         // Add special class to the element options.
         foreach ($elementoptionslist as $type => $optionslist) {
-
             foreach ($optionslist as $elementfield) {
                 $attrs = $elementfield->getAttributes();
                 $attrs['data-condition'] = $type;
@@ -103,7 +103,6 @@ class block_precondition_edit_form extends block_edit_form {
         $mform->addElement('editor', 'config_message', get_string('conditionmessage', 'block_precondition'), null, $editoroptions);
         $mform->addRule('config_message', null, 'required', null, 'client');
         $mform->setType('config_message', PARAM_RAW); // XSS is prevented when printing the block contents and serving files.
-
     }
 
     /**
@@ -113,7 +112,6 @@ class block_precondition_edit_form extends block_edit_form {
      * @return void
      */
     public function set_data($defaults) {
-
         if (!empty($this->block->config) && !empty($this->block->config->message)) {
             $message = $this->block->config->message;
             $draftideditor = file_get_submitted_draft_itemid('config_message');
@@ -122,8 +120,15 @@ class block_precondition_edit_form extends block_edit_form {
             } else {
                 $currentmessage = $message;
             }
-            $defaults->config_message['text'] = file_prepare_draft_area($draftideditor, $this->block->context->id,
-                                                        'block_precondition', 'message', 0, ['subdirs' => true], $currentmessage);
+            $defaults->config_message['text'] = file_prepare_draft_area(
+                $draftideditor,
+                $this->block->context->id,
+                'block_precondition',
+                'message',
+                0,
+                ['subdirs' => true],
+                $currentmessage
+            );
             $defaults->config_message['itemid'] = $draftideditor;
             $defaults->config_message['format'] = $this->block->config->messageformat ?? FORMAT_MOODLE;
         } else {
@@ -140,5 +145,4 @@ class block_precondition_edit_form extends block_edit_form {
 
         $this->block->config->message = $message;
     }
-
 }

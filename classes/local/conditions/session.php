@@ -26,7 +26,6 @@ use block_precondition\local\condition_base;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class session extends condition_base {
-
     /**
      * Get the name of the condition.
      *
@@ -43,7 +42,6 @@ class session extends condition_base {
      * @return array The key is the id of the element and the value is the name of the element.
      */
     public function get_elements($courseid): array {
-
         $values = [
             '1' => get_string('conditionsession_one', 'block_precondition'),
         ];
@@ -72,7 +70,6 @@ class session extends condition_base {
      * @return bool
      */
     public function satisfied($id, $precondition, $context): bool {
-
         $cache = \cache::make('block_precondition', 'conditionsession');
         $data = $cache->get('satisfied');
 
@@ -92,5 +89,4 @@ class session extends condition_base {
 
         return true;
     }
-
 }

@@ -32,5 +32,5 @@ $definitions = [
         'mode' => cache_store::MODE_SESSION,
         'simplekeys' => true,
         'simpledata' => true,
-    ]
+    ],
 ];

@@ -24,7 +24,6 @@ use block_precondition\local\controller;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_precondition extends block_base {
-
     /**
      * If the JS block has been initialized.
      * It's required to avoid multiple JS initializations.
@@ -158,12 +157,14 @@ class block_precondition extends block_base {
             $filteropt->noclean = true;
         }
 
-        $htmlmessage = file_rewrite_pluginfile_urls($this->config->message,
-                    'pluginfile.php',
-                    $this->context->id,
-                    'block_precondition',
-                    'message',
-                    null);
+        $htmlmessage = file_rewrite_pluginfile_urls(
+            $this->config->message,
+            'pluginfile.php',
+            $this->context->id,
+            'block_precondition',
+            'message',
+            null
+        );
 
         // Default to FORMAT_HTML.
         $messageformat = FORMAT_HTML;
@@ -190,7 +191,6 @@ class block_precondition extends block_base {
         }
 
         return $this->content;
-
     }
 
     /**
@@ -204,6 +204,7 @@ class block_precondition extends block_base {
         if (!$context = context::instance_by_id($this->instance->parentcontextid, IGNORE_MISSING)) {
             return false;
         }
+
         // Find out if this block is on the profile page.
         if ($context->contextlevel == CONTEXT_USER) {
             if ($SCRIPT === '/my/index.php') {
@@ -227,16 +228,17 @@ class block_precondition extends block_base {
      * @return void
      */
     public function instance_config_save($data, $nolongerused = false) {
-
         $config = clone($data);
         // Move embedded files into a proper filearea and adjust HTML links to match.
-        $config->message = file_save_draft_area_files($data->message['itemid'],
-                              $this->context->id,
-                              'block_precondition',
-                              'message',
-                              0,
-                              ['subdirs' => true],
-                              $data->message['text']);
+        $config->message = file_save_draft_area_files(
+            $data->message['itemid'],
+            $this->context->id,
+            'block_precondition',
+            'message',
+            0,
+            ['subdirs' => true],
+            $data->message['text']
+        );
         $config->messageformat = $data->message['format'];
         parent::instance_config_save($config, $nolongerused);
     }
@@ -247,7 +249,6 @@ class block_precondition extends block_base {
      * @return bool
      */
     public function instance_delete() {
-
         $fs = get_file_storage();
         $fs->delete_area_files($this->context->id, 'block_precondition');
 
@@ -272,5 +273,4 @@ class block_precondition extends block_base {
 
         return true;
     }
-
 }

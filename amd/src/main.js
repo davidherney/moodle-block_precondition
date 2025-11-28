@@ -24,8 +24,9 @@
 import $ from 'jquery';
 import Log from 'core/log';
 import {get_strings as getStrings} from 'core/str';
-import ModalFactory from 'core/modal_factory';
+import Modal from 'core/modal';
 import ModalEvents from 'core/modal_events';
+import Notification from 'core/notification';
 
 // Load strings.
 var strings = [
@@ -68,7 +69,6 @@ function loadStrings() {
  *
  */
 export const init = async() => {
-
     var messages = [];
     $('.block_precondition-message').each(function() {
         var $message = $(this);
@@ -79,24 +79,19 @@ export const init = async() => {
 
     var finalMessage = '<div class="block_precondition-message">' + messages.join('<hr>') + '</div>';
 
-    ModalFactory.create({
-        type: ModalFactory.types.ALERT,
+    Modal.create({
         body: finalMessage,
         title: s.conditionstitle,
     })
     .then(function(modal) {
-
         // When the dialog is closed, perform the callback (if provided).
-        modal.getRoot().on(ModalEvents.hidden, function() {
+        modal.getRoot().on(ModalEvents.cancel, function() {
             modal.getRoot().remove();
         });
 
+        modal.getRoot().addClass('block_precondition-modal');
         modal.show();
 
         return modal;
-    })
-    .fail(function() {
-        Log.error('Error creating modal');
-    });
-
+    }).catch(Notification.exception);
 };

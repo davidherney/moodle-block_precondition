@@ -33,7 +33,6 @@ use block_precondition\local\condition_base;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_page extends condition_base {
-
     /**
      * Get the name of the condition.
      *
@@ -121,12 +120,15 @@ class mod_page extends condition_base {
     public function satisfied($id, $precondition, $context): bool {
         global $DB, $USER;
 
-        $count = $DB->count_records('logstore_standard_log', [
-                                                                'objectid' => $id,
-                                                                'component' => 'mod_page',
-                                                                'userid' => $USER->id,
-                                                                'action' => 'viewed',
-                                                            ]);
+        $count = $DB->count_records(
+            'logstore_standard_log',
+            [
+                'objectid' => $id,
+                'component' => 'mod_page',
+                'userid' => $USER->id,
+                'action' => 'viewed',
+            ]
+        );
 
         return $count > 0;
     }
@@ -145,5 +147,4 @@ class mod_page extends condition_base {
 
         return '';
     }
-
 }

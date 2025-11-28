@@ -32,7 +32,6 @@ use plugin_renderer_base;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
-
     /**
      * Return the template content for the block.
      *
@@ -42,5 +41,4 @@ class renderer extends plugin_renderer_base {
     public function render_contents(content $content): string {
         return $this->render_from_template('block_precondition/content', $content->export_for_template($this));
     }
-
 }

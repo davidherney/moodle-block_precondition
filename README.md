@@ -14,6 +14,9 @@ Download zip package, extract the precondition folder and upload this folder int
 
 ## In version
 
+### 2024072348:
+* Change Modal factory by new Modal.
+
 ### 2024072346:
 * New 'Once per session' precondition type.
 * Compatibility with Moodle 4.5+
