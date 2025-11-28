@@ -40,7 +40,6 @@ var s = [];
  * @return {Promise} Promise that is resolved when the strings are loaded.
  */
 async function loadStrings() {
-
     strings.forEach(one => {
         s[one.key] = one.key;
     });
