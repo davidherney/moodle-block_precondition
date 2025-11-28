@@ -37,6 +37,7 @@ $string['excludeadmins_help'] = 'Exclude admins from the precondition validation
 $string['forecastdays'] = 'Forecast days';
 $string['forecastdays_help'] = 'Days to display the message before the activity ends. If the activity does not have an end date then this configuration will not be taken into account.';
 $string['gotocomplete'] = 'Go to complete';
+$string['modulenotrestored'] = 'The activity required to satisfy this condition was not restored.';
 $string['period'] = 'Period';
 $string['pluginname'] = 'Precondition';
 $string['precondition:addinstance'] = 'Add a new Precondition';

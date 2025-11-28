@@ -23,15 +23,21 @@
 
 import $ from 'jquery';
 import Log from 'core/log';
-import {get_strings as getStrings} from 'core/str';
 import Modal from 'core/modal';
 import ModalEvents from 'core/modal_events';
 import Notification from 'core/notification';
+import {get_strings as getStrings} from 'core/str';
 
-// Load strings.
+/**
+ * @type {Array} strings List of strings to load.
+ */
 var strings = [
     {key: 'conditionstitle', component: 'block_precondition'},
 ];
+
+/**
+ * @type {Array} s Loaded strings.
+ */
 var s = [];
 
 /**

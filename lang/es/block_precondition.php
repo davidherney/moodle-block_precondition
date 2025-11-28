@@ -37,6 +37,7 @@ $string['excludeadmins_help'] = 'Excluir administradores de la validación de co
 $string['forecastdays'] = 'Días de previsión';
 $string['forecastdays_help'] = 'Días para mostrar el mensaje antes de que finalice la actividad. Si la actividad no tiene fecha de finalización entonces esta configuración no será tenida en cuenta.';
 $string['gotocomplete'] = 'Ir a completar';
+$string['modulenotrestored'] = 'La actividad requerida para satisfacer esta condición no fue restaurada.';
 $string['period'] = 'Período';
 $string['pluginname'] = 'Mensaje de pre-condición';
 $string['precondition:addinstance'] = 'Adicionar un nuevo bloque de Precondición';

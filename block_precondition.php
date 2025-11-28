@@ -95,7 +95,7 @@ class block_precondition extends block_base {
             return $this->content;
         }
 
-        $this->content = new stdClass;
+        $this->content = new stdClass();
         $this->content->text = '';
         $this->content->footer = '';
 
@@ -153,7 +153,7 @@ class block_precondition extends block_base {
         $url = $precondition->get_url($elementid);
 
         // Process the message.
-        $filteropt = new \stdClass;
+        $filteropt = new \stdClass();
         $filteropt->overflowdiv = true;
 
         // If the content is trusted, do not clean it.

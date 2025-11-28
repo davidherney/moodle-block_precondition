@@ -22,7 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_monitor\output\managesubs\subs;
+
 defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->dirroot . '/blocks/precondition/backup/moodle2/restore_precondition_block_decode_content.php');
 
 /**
  * Specialised restore task for the html block (requires encode_content_links in some configdata attrs).
@@ -81,64 +85,50 @@ class restore_precondition_block_task extends restore_block_task {
     public static function define_decode_rules() {
         return [];
     }
-}
-
-/**
- * Class specialised in decoding content for the precondition block.
- *
- * Specialised restore_decode_content provider that unserializes the configdata
- * field, to serve the configdata->message content to the restore_decode_processor
- * packaging it back to its serialized form after process.
- *
- * @copyright  2024 David Herney @ BambuCo
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class restore_precondition_block_decode_content extends restore_decode_content {
-    /**
-     * Temp storage for unserialized configdata
-     * @var object
-     */
-    protected $configdata;
 
     /**
-     * Iteration over the restore records.
-     *
-     * @var array
+     * Translates the backed up configuration data for the target course modules.
      */
-    protected function get_iterator() {
+    public function after_restore() {
         global $DB;
 
-        // Build the SQL dynamically here.
-        $fieldslist = 't.' . implode(', t.', $this->fields);
-        $sql = "SELECT t.id, $fieldslist
-                  FROM {" . $this->tablename . "} t
-                  JOIN {backup_ids_temp} b ON b.newitemid = t.id
-                 WHERE b.backupid = ?
-                   AND b.itemname = ?
-                   AND t.blockname = 'html'";
-        $params = [$this->restoreid, $this->mapping];
-        return ($DB->get_recordset_sql($sql, $params));
-    }
+        // Get the blockid.
+        $id = $this->get_blockid();
 
-    /**
-     * Preprocess the field
-     *
-     * @param string $field
-     * @return string
-     */
-    protected function preprocess_field($field) {
-        $this->configdata = unserialize_object(base64_decode($field));
-        return isset($this->configdata->message) ? $this->configdata->message : '';
-    }
+        $changed = false;
 
-    /**
-     * Postprocess the field
-     *
-     * @param string $field
-     * @return string
-     */
-    protected function postprocess_field($field) {
-        $this->configdata->message = $field;
-        return base64_encode(serialize($this->configdata));
+        if ($configdata = $DB->get_field('block_instances', 'configdata', ['id' => $id])) {
+            $config = (array)unserialize(base64_decode($configdata));
+
+            if (isset($config['condition']) && substr($config['condition'], 0, 4) === 'mod_') {
+                // Translate the old config information to the target course values.
+                $parts = explode('-', $config['condition']);
+
+                if (count($parts) != 2) {
+                    return;
+                }
+
+                $module = substr($parts[0], 4);
+                $instance = $parts[1];
+
+                // Find the mapped instance ID.
+                if ($newinstance = restore_dbops::get_backup_ids_record($this->get_restoreid(), $module, $instance)) {
+                    $newinstanceid = $newinstance->newitemid;
+                    $newcondition = "mod_$module-$newinstanceid";
+                    $config['condition'] = $newcondition;
+                } else {
+                    // The instance was not restored, reset the condition.
+                    $config['condition'] = '';
+                    $config['message'] .= '<p>' . get_string('modulenotrestored', 'block_precondition') . '</p>';
+                }
+                $changed = true;
+            }
+
+            if ($changed) {
+                // Save everything back to DB.
+                $configdata = base64_encode(serialize((object)$config));
+                $DB->set_field('block_instances', 'configdata', $configdata, ['id' => $id]);
+            }
+        }
     }
 }
