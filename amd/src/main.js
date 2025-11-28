@@ -39,27 +39,24 @@ var s = [];
  *
  * @return {Promise} Promise that is resolved when the strings are loaded.
  */
-function loadStrings() {
+async function loadStrings() {
 
     strings.forEach(one => {
         s[one.key] = one.key;
     });
 
-    return new Promise((resolve) => {
-        getStrings(strings).then(function(results) {
-            var pos = 0;
-            strings.forEach(one => {
-                s[one.key] = results[pos];
-                pos++;
-            });
-
-            resolve(true);
-            return true;
-        }).fail(function(e) {
-            Log.debug('Error loading strings');
-            Log.debug(e);
-            return false;
+    await getStrings(strings).then(function(results) {
+        var pos = 0;
+        strings.forEach(one => {
+            s[one.key] = results[pos];
+            pos++;
         });
+
+        return true;
+    }).fail(function(e) {
+        Log.debug('Error loading strings');
+        Log.debug(e);
+        return false;
     });
 }
 // End of Load strings.
