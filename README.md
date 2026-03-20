@@ -2,7 +2,7 @@
 
 A moodle block to display a message if a defined condition is not satisfied.
 
-Package tested on: moodle 4.5+ and 5.0+.
+Package tested on: moodle 4.5+ - 5.1+.
 
 ## Quick install
 Download zip package, extract the precondition folder and upload this folder into blocks/.
@@ -13,6 +13,9 @@ Download zip package, extract the precondition folder and upload this folder int
 * **Powered by:** [BambuCo](https://bambuco.co/)
 
 ## In version
+
+### 2024072350:
+* Compatibility with Moodle 5.1+
 
 ### 2024072349:
 * Compatibility with Moodle 5.0+
@@ -50,7 +53,7 @@ Start project
 * C: the first release
 * a: Moodle 4.1+ version
 * t: Moodle [4.3+, 4.5] version
-* A: Moodle [4.5+, 5.0+] version
+* A: Moodle [4.5+, 5.1+] version
 
 ## License
 GNU/GPL
